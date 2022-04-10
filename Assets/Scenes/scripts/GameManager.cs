@@ -9,13 +9,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform setfiledTransform;
     [SerializeField] CardContoroller cardPrefab;
     [SerializeField] Transform openfiledTransform;
+    List<CardContoroller> cards = new List<CardContoroller>();
+    [SerializeField] Score score;
+    [SerializeField] Restcard rest;
+    [SerializeField] Trash trash;
+    [SerializeField] Remain remain;
     void Start()
     {
-
+        remain.SetUp();
+        trash.SetUp();
+        score.Setup();
+        rest.Setup();
          Shuffle();
          Cardnumber();
-        startCreateCard(openfiledTransform);
-        CreateCard(setfiledTransform);
+        openCreateCard(openfiledTransform);
+        setCreateCard(setfiledTransform);
 
     }
 
@@ -43,29 +51,38 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void startCreateCard(Transform set)
+    public void openCreateCard(Transform set)
     {
 
 
 
         int j = (deck[0]);
         CardContoroller card = Instantiate(cardPrefab, set, false);
-        card.Init(j);
-
-
-
+        card.Init(j,0);
+        remain.delete(j);
+        cards.Add(card);
+        rest.CountDown(1);
     }
-    public void CreateCard(Transform set)
+    public void setCreateCard(Transform set)
     {
-
 
         
             int j = (deck[1]);
             CardContoroller card = Instantiate(cardPrefab, set, false);
-            card.Init(j);
-             
-            
-        
+            card.Init(j,1);
+            cards.Add(card);
+
+
+    }
+    
+    void DeleteCards() 
+    {
+    
+        foreach(var card in cards) 
+        {
+            Destroy(card.gameObject);
+        }
+        cards.Clear();
     }
 
     void Update()
@@ -87,10 +104,8 @@ public class GameManager : MonoBehaviour
             k = k + 9;
         }
         Debug.Log(j + "‚Æ" + k);
-        CreateCard(openfiledTransform);
-        deck.RemoveAt(0);
-        CreateCard(setfiledTransform);
-            if (j < k) 
+        
+        if (j < k) 
         {
             failed();
         }
@@ -102,7 +117,11 @@ public class GameManager : MonoBehaviour
         {
             draw();
         }
-        
+
+        DeleteCards();
+        deck.RemoveAt(0);
+        openCreateCard(openfiledTransform);
+        setCreateCard(setfiledTransform);
     }
 
     public void low() 
@@ -118,9 +137,7 @@ public class GameManager : MonoBehaviour
             k = k + 9;
         }
         Debug.Log(j + "‚Æ" + k);
-        CreateCard(openfiledTransform);
-        deck.RemoveAt(0);
-        CreateCard(setfiledTransform);
+        
         if (j < k)
         {
             success();
@@ -133,6 +150,12 @@ public class GameManager : MonoBehaviour
         {
             draw();
         }
+
+        DeleteCards();
+        deck.RemoveAt(0);
+        openCreateCard(openfiledTransform);
+        setCreateCard(setfiledTransform);
+
     }
 
     public void same() 
@@ -148,9 +171,8 @@ public class GameManager : MonoBehaviour
             k = k + 9;
         }
         Debug.Log(j + "‚Æ" + k);
-        CreateCard(openfiledTransform);
-        deck.RemoveAt(0);
-        CreateCard(setfiledTransform);
+        
+        
         if (j == k)
         {
             fantastick();
@@ -159,29 +181,46 @@ public class GameManager : MonoBehaviour
         {
             failed();
         }
-        
+
+        DeleteCards();
+        deck.RemoveAt(0);
+        openCreateCard(openfiledTransform);
+        setCreateCard(setfiledTransform);
     }
 
     public void pass()
     {
-        CreateCard(openfiledTransform);
+        DeleteCards();
         deck.RemoveAt(0);
-        CreateCard(setfiledTransform);
+        openCreateCard(openfiledTransform);
+        setCreateCard(setfiledTransform);
+        
         through();
     }
      void success() 
     {
         Debug.Log("success");
+        score.ScoreUp(10);
     }
 
     void failed() 
     {
+
         Debug.Log("failed");
+        int j = (deck[2]);
+        int k = (j - 1) / 9;
+        trash.Init(k);
+        Debug.Log(k);
+        Debug.Log(deck[2]+"‚Ìíœ");
+        deck.RemoveAt(2);
+        rest.CountDown(1);
+
     }
 
     void fantastick() 
     {
         Debug.Log("fantastick");
+        score.ScoreUp(30);
     }
     void through() 
     {
