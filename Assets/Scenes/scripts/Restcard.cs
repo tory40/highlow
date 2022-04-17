@@ -22,6 +22,12 @@ public class Restcard : MonoBehaviour
     public void CountDown(int take)
     {
         value -= take;
+        if (value < 0)
+        {
+            value = 0;
+        }
         text.text = value.ToString();
-    }
+       
+    }    
+           
 }

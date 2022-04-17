@@ -14,8 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Restcard rest;
     [SerializeField] Trash trash;
     [SerializeField] Remain remain;
+    [SerializeField] Timer time;
+    [SerializeField] Judge judge;
     void Start()
     {
+        judge.Setup();
         remain.SetUp();
         trash.SetUp();
         score.Setup();
@@ -93,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     public void high() 
     {
+        time.Time(2);
         int j = (deck[1] % 9);
         int k = (deck[0] % 9);
         if (j == 0)
@@ -199,13 +203,14 @@ public class GameManager : MonoBehaviour
     }
      void success() 
     {
+        judge.View(1);
         Debug.Log("success");
         score.ScoreUp(10);
     }
 
     void failed() 
     {
-
+        judge.View(2);
         Debug.Log("failed");
         int j = (deck[2]);
         int k = (j - 1) / 9;
@@ -219,16 +224,19 @@ public class GameManager : MonoBehaviour
 
     void fantastick() 
     {
+        judge.View(3);
         Debug.Log("fantastick");
         score.ScoreUp(30);
     }
     void through() 
     {
+        judge.View(4);
         Debug.Log("pass");
     }
 
     void draw() 
     {
+        judge.View(5);
         Debug.Log("draw");
     }
 }
