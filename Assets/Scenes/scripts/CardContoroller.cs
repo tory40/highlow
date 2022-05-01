@@ -13,11 +13,18 @@ public class CardContoroller : MonoBehaviour
         view = GetComponent<CardView>();
     }
 
-    public void Init(int cardID,int i)
+    public void Init(int cardID)
     {
         
         model = new CardModel(cardID);
-        view.Show(model,i);
+        view.Show(model);
         
     }
-}
+    public void Hide() 
+    {
+        view.Hide();
+    }
+   
+   
+} 
+    

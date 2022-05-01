@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Remain remain;
     [SerializeField] Timer time;
     [SerializeField] Judge judge;
+    bool canPushButton;
     void Start()
     {
+        canPushButton = true;
         judge.Setup();
         remain.SetUp();
         trash.SetUp();
@@ -56,28 +58,50 @@ public class GameManager : MonoBehaviour
 
     public void openCreateCard(Transform set)
     {
-
-
-
-        int j = (deck[0]);
-        CardContoroller card = Instantiate(cardPrefab, set, false);
-        card.Init(j,0);
-        remain.delete(j);
-        cards.Add(card);
-        rest.CountDown(1);
+        if (deck.Count > 0)
+        {
+            int j = (deck[0]);
+            CardContoroller card = Instantiate(cardPrefab, set, false);
+            card.Init(j);
+            remain.delete(j);
+            cards.Add(card);
+            rest.CountDown(1);
+        }
+        else 
+        {
+            canPushButton = false;
+            End();
+        }
     }
     public void setCreateCard(Transform set)
     {
 
-        
+        if (deck.Count > 1)
+        {
             int j = (deck[1]);
             CardContoroller card = Instantiate(cardPrefab, set, false);
-            card.Init(j,1);
+            card.Init(j);
+            card.Hide();
             cards.Add(card);
+        }
+        else 
+        {
+            canPushButton = false;
+            End();
+        }
+    }
+    public void checkCreateCard(Transform set)
+    {
+
+
+        int j = (deck[1]);
+        CardContoroller card = Instantiate(cardPrefab, set, false);
+        card.Init(j);
+        cards.Add(card);
 
 
     }
-    
+
     void DeleteCards() 
     {
     
@@ -96,7 +120,17 @@ public class GameManager : MonoBehaviour
 
     public void high() 
     {
-        time.Time(2);
+        if (canPushButton)
+        {
+            canPushButton = false;
+            StartCoroutine(OnHighCor());
+        }
+    }
+
+    IEnumerator OnHighCor() 
+    {
+        checkCreateCard(setfiledTransform);
+        yield return new WaitForSeconds(1);
         int j = (deck[1] % 9);
         int k = (deck[0] % 9);
         if (j == 0)
@@ -108,28 +142,35 @@ public class GameManager : MonoBehaviour
             k = k + 9;
         }
         Debug.Log(j + "Ç∆" + k);
-        
-        if (j < k) 
+
+        if (j < k)
         {
             failed();
         }
-        else if (j > k) 
+        else if (j > k)
         {
             success();
         }
-        else 
+        else
         {
             draw();
         }
-
-        DeleteCards();
-        deck.RemoveAt(0);
-        openCreateCard(openfiledTransform);
-        setCreateCard(setfiledTransform);
+        StartCoroutine(OnCor());
     }
 
-    public void low() 
+    public void low()
     {
+        if (canPushButton)
+        {
+            canPushButton = false;
+            StartCoroutine(OnLowCor());
+        }
+    }
+
+    IEnumerator OnLowCor() 
+    {
+        checkCreateCard(setfiledTransform);
+        yield return new WaitForSeconds(1);
         int j = (deck[1] % 9);
         int k = (deck[0] % 9);
         if (j == 0)
@@ -154,16 +195,21 @@ public class GameManager : MonoBehaviour
         {
             draw();
         }
-
-        DeleteCards();
-        deck.RemoveAt(0);
-        openCreateCard(openfiledTransform);
-        setCreateCard(setfiledTransform);
-
+        StartCoroutine(OnCor());
+    }
+    public void same()
+    {
+        if (canPushButton)
+        {
+            canPushButton = false;
+            StartCoroutine(OnSameCor());
+        }
     }
 
-    public void same() 
+    IEnumerator OnSameCor() 
     {
+        checkCreateCard(setfiledTransform);
+        yield return new WaitForSeconds(1);
         int j = (deck[1] % 9);
         int k = (deck[0] % 9);
         if (j == 0)
@@ -185,21 +231,32 @@ public class GameManager : MonoBehaviour
         {
             failed();
         }
-
-        DeleteCards();
-        deck.RemoveAt(0);
-        openCreateCard(openfiledTransform);
-        setCreateCard(setfiledTransform);
+        StartCoroutine(OnCor());
     }
-
     public void pass()
     {
+        if (canPushButton)
+        {
+            canPushButton = false;
+            StartCoroutine(OnPassCor());
+        }
+    }
+    IEnumerator OnPassCor()
+    {
+        checkCreateCard(setfiledTransform);
+        yield return new WaitForSeconds(1);
+        through();
+        StartCoroutine(OnCor());
+    }
+
+    IEnumerator OnCor() 
+    {
+        yield return new WaitForSeconds(2);
         DeleteCards();
         deck.RemoveAt(0);
         openCreateCard(openfiledTransform);
         setCreateCard(setfiledTransform);
-        
-        through();
+        canPushButton = true;
     }
      void success() 
     {
@@ -238,5 +295,10 @@ public class GameManager : MonoBehaviour
     {
         judge.View(5);
         Debug.Log("draw");
+    }
+
+    public void End() 
+    {
+        Debug.Log("èIóπ");
     }
 }

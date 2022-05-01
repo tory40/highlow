@@ -7,14 +7,13 @@ public class CardView : MonoBehaviour
     [SerializeField] Text numberText;
     [SerializeField] Image iconImage;
 
-    public void Show(CardModel cardModel,int i)
+    public void Show(CardModel cardModel)
     {
         numberText.text = cardModel.number.ToString();
         iconImage.sprite = cardModel.icon;
-        if(i == 1) 
-        {
-            Destroy(numberText);
-        
-        }
+    }
+    public void Hide() 
+    {
+        numberText.text = "";
     }
 }

@@ -41,7 +41,12 @@ using UnityEngine.UI;
                 break;
         }
         obj.SetActive(true);
-        time.Time(2);
+        StartCoroutine(OpenAndHide());
+    }
+
+    IEnumerator OpenAndHide() 
+    {
+        yield return new WaitForSeconds(2);
         obj.SetActive(false);
     }
 }
