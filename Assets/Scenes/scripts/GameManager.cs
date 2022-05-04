@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 
 {
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void checkCreateCard(Transform set)
     {
 
-
+        SoundManager.Instance.PlaySE(0);
         int j = (deck[1]);
         CardContoroller card = Instantiate(cardPrefab, set, false);
         card.Init(j);
@@ -260,6 +261,7 @@ public class GameManager : MonoBehaviour
     }
      void success() 
     {
+        SoundManager.Instance.PlaySE(4);
         judge.View(1);
         Debug.Log("success");
         score.ScoreUp(10);
@@ -267,6 +269,7 @@ public class GameManager : MonoBehaviour
 
     void failed() 
     {
+        SoundManager.Instance.PlaySE(6);
         judge.View(2);
         Debug.Log("failed");
         int j = (deck[2]);
@@ -281,24 +284,27 @@ public class GameManager : MonoBehaviour
 
     void fantastick() 
     {
+        SoundManager.Instance.PlaySE(3);
         judge.View(3);
         Debug.Log("fantastick");
         score.ScoreUp(30);
     }
     void through() 
     {
+        SoundManager.Instance.PlaySE(5);
         judge.View(4);
         Debug.Log("pass");
     }
 
     void draw() 
     {
+        SoundManager.Instance.PlaySE(5);
         judge.View(5);
         Debug.Log("draw");
     }
 
     public void End() 
     {
-        Debug.Log("èIóπ");
+        SceneManager.LoadScene("Ranking2");
     }
 }

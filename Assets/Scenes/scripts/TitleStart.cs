@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class TitleStart : MonoBehaviour
 {
     bool canstart = true;
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM(0);
+    }
     public void PressStart()
     {
         if (canstart) 

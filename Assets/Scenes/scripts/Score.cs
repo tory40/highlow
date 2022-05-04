@@ -9,17 +9,17 @@ public class Score : MonoBehaviour
 
     [SerializeField] Text text;
 
-    int value = 0;
+    public static int score = 0;
 
     public void Setup() 
     {
-        value = 0;
-        text.text = value.ToString();
+        score = 0;
+        text.text = score.ToString();
     }
 
     public void ScoreUp (int add)
     {
-        value += add;
-        text.text = value.ToString();
+        score += add;
+        text.text = score.ToString();
     }
 }
