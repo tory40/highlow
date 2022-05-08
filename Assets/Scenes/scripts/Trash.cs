@@ -4,73 +4,89 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Trash : MonoBehaviour
 {
-
-    [SerializeField] Text trashaxe;
-    [SerializeField] Text trashbeast;
-    [SerializeField] Text trashsickle;
-    [SerializeField] Text trashice;
-
-    int axe = 0;
-    int beast = 0;
-    int sickle = 0;
-    int ice = 0;
-
-    public void SetUp()
+    int type = Type2.Typenum;
+    int count = Count2.Countnum;
+    [SerializeField] GameObject[] sample;
+    [SerializeField] Transform set;
+    List<GameObject> trashs = new List<GameObject>();
+    List<Text> trashstext = new List<Text>();
+    List<int> trashsint = new List<int>();
+    [SerializeField] Text sampletext;
+    [SerializeField] GridLayoutGroup grid;
+    public void SetUp() 
     {
-        axe = 0;
-        trashaxe.text = axe.ToString();
-        beast = 0;
-        trashbeast.text = beast.ToString();
-        sickle = 0;
-        trashsickle.text = sickle.ToString();
-        ice = 0;
-        trashice.text = ice.ToString();
-
+        Create();
+        Createtext();
+        Pad(grid);
     }
-    public void Init(int k)
+    public void Pad(GridLayoutGroup grid)
     {
-        switch (k)
+        //セルサイズを入力
+        int sizex = 60;
+        int sizey = 60;
+        //全体の寸法を入力
+        int wide = 160;
+        int height = 460;
+        //端のスペースを入力
+        int i = 200 / type;
+        int top = i;
+        int bottom = i;
+        int right = 10;
+        int left = 10;
+        //配置する列と団の数
+        int step = 2;
+        int line = type;
+        Vector2 size = new Vector2(sizex, sizey);
+        grid.cellSize = size;
+        int x;
+        int y;
+        grid.padding.top = top;
+        grid.padding.left = left;
+        grid.padding.right = right;
+        grid.padding.bottom = bottom;
+        if (step > 1)
         {
-            case 0:
-                Axe(1);
-                break;
-            case 1:
-                Beast(1);
-                break;
-            case 2:
-                Sickle(1);
-                break;
-            case 3:
-                Ice(1);
-                break;
-            default:
-                Debug.Log("エラー");
-                break;
+            x = (wide - (sizex * step) - left - right) / (step - 1);
+        }
+        else
+        {
+            x = 0;
+        }
+        if (line > 1)
+        {
+            y = (height - (sizey * line) - top - bottom) / (line - 1);
+        }
+        else
+        {
+            y = 0;
+        }
+        Vector2 space = new Vector2(x, y);
+        grid.spacing = space;
+    }
 
+    public void Create()
+    {
+        for (int i = 0; i < type; i++)
+        {
+            GameObject trash = Instantiate(sample[i], set, false);
+            trashs.Add(trash);
         }
     }
 
-    public void Axe(int add)
+    public void Createtext()
     {
-        axe += add;
-        trashaxe.text = axe.ToString();
+        for (int i = 0; i < type; i++)
+        {
+            Text trashtext = Instantiate(sampletext, set, false);
+            trashstext.Add(trashtext);
+            trashsint.Add(0);
+            trashstext[i].text = trashsint[i].ToString();
+        }
     }
 
-    public void Beast(int add)
+    public void Init(int i)
     {
-        beast += add;
-        trashbeast.text = beast.ToString();
-    }
-
-    public void Sickle(int add)
-    {
-        sickle += add;
-        trashsickle.text = sickle.ToString();
-    }
-
-    public void Ice(int add)
-    {
-        ice += add;
-        trashice.text = ice.ToString();
+        ++trashsint[i];
+        trashstext[i].text = trashsint[i].ToString();
     }
 }

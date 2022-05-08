@@ -11,11 +11,11 @@ public class Restcard : MonoBehaviour
 
     [SerializeField] Text text;
 
-    int value = 35;
+    int value = (Count2.Countnum*Type2.Typenum)-1;
 
     public void Setup()
     {
-        value = 35;
+        value = (Count2.Countnum * Type2.Typenum) - 1;
         text.text = value.ToString();
     }
 

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 {
     [SerializeField] GameObject obj;
     [SerializeField] Text text;
-    [SerializeField] Timer time;
 
 
     public void Setup()

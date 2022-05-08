@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 
 {
+    int count = Count2.Countnum;
+    int type = Type2.Typenum;
     // カード情報の生成
-    List<int> deck = new List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,36 };
+    List<int> deck = new List<int>();
     [SerializeField] Transform setfiledTransform;
     [SerializeField] CardContoroller cardPrefab;
     [SerializeField] Transform openfiledTransform;
@@ -15,11 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Restcard rest;
     [SerializeField] Trash trash;
     [SerializeField] Remain remain;
-    [SerializeField] Timer time;
     [SerializeField] Judge judge;
     bool canPushButton;
     void Start()
     {
+        Deck();
         canPushButton = true;
         judge.Setup();
         remain.SetUp();
@@ -30,7 +32,15 @@ public class GameManager : MonoBehaviour
          Cardnumber();
         openCreateCard(openfiledTransform);
         setCreateCard(setfiledTransform);
+        Debug.Log(deck);
+    }
 
+    public void Deck() 
+    {
+        for (int i =0;i<count*type;i++) 
+        {
+            deck.Add(i);
+        }
     }
 
     void Shuffle()//カード生成後シャッフル
@@ -132,16 +142,8 @@ public class GameManager : MonoBehaviour
     {
         checkCreateCard(setfiledTransform);
         yield return new WaitForSeconds(1);
-        int j = (deck[1] % 9);
-        int k = (deck[0] % 9);
-        if (j == 0)
-        {
-            j = j + 9;
-        }
-        if (k == 0)
-        {
-            k = k + 9;
-        }
+        int j = (deck[1] % count);
+        int k = (deck[0] % count);
         Debug.Log(j + "と" + k);
 
         if (j < k)
@@ -172,16 +174,8 @@ public class GameManager : MonoBehaviour
     {
         checkCreateCard(setfiledTransform);
         yield return new WaitForSeconds(1);
-        int j = (deck[1] % 9);
-        int k = (deck[0] % 9);
-        if (j == 0)
-        {
-            j = j + 9;
-        }
-        if (k == 0)
-        {
-            k = k + 9;
-        }
+        int j = (deck[1] % count);
+        int k = (deck[0] % count);
         Debug.Log(j + "と" + k);
         
         if (j < k)
@@ -211,16 +205,8 @@ public class GameManager : MonoBehaviour
     {
         checkCreateCard(setfiledTransform);
         yield return new WaitForSeconds(1);
-        int j = (deck[1] % 9);
-        int k = (deck[0] % 9);
-        if (j == 0)
-        {
-            j = j + 9;
-        }
-        if (k == 0)
-        {
-            k = k + 9;
-        }
+        int j = (deck[1] % count);
+        int k = (deck[0] % count);
         Debug.Log(j + "と" + k);
         
         
@@ -273,7 +259,7 @@ public class GameManager : MonoBehaviour
         judge.View(2);
         Debug.Log("failed");
         int j = (deck[2]);
-        int k = (j - 1) / 9;
+        int k = j / 9;
         trash.Init(k);
         Debug.Log(k);
         Debug.Log(deck[2]+"の削除");

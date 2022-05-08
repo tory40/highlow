@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleStart : MonoBehaviour
+public class pushstart : MonoBehaviour
 {
     bool canstart = true;
-
-    private void Start()
-    {
-        SoundManager.Instance.PlayBGM(0);
-    }
     public void PressStart()
     {
-        if (canstart) 
+        if (canstart)
         {
             canstart = false;
-            SceneManager.LoadScene("DeckSerect");
+            SceneManager.LoadScene("SampleScene");
         }
     }
 }
