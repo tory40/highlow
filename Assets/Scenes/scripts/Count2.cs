@@ -16,7 +16,7 @@ public class Count2 : MonoBehaviour
     {
         SoundManager.Instance.PlaySE(1);
         Countnum++;
-        if (Countnum > 9)
+        if (Countnum > 15)
         {
             Countnum = 1;
         }
@@ -29,7 +29,7 @@ public class Count2 : MonoBehaviour
         Countnum--;
         if (Countnum < 1)
         {
-            Countnum = 4;
+            Countnum = 15;
         }
         number.text = Countnum.ToString();
     }

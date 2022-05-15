@@ -23,7 +23,7 @@ public class Remain : MonoBehaviour
     public void Pad()
     {
         //セルサイズを入力
-        int sizex = 60;
+        int sizex = 30;
         int sizey = 60;
         //全体の寸法を入力
         int wide = 600;
@@ -32,8 +32,9 @@ public class Remain : MonoBehaviour
         int i = 200 / type;
         int top = i;
         int bottom = i;
-        int right = 10;
-        int left = 10;
+        int j = 285 / count;
+        int right = j;
+        int left = j;
         //配置する列と団の数
         int step = count;
         int line = type;
