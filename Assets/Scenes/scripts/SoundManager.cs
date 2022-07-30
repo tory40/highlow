@@ -16,6 +16,12 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager Instance;
 
+    [SerializeField] GameObject option;
+    public void Open()
+    {
+        option.SetActive(true);
+    }
+
     private void Awake()
     {
         if(Instance == null) 

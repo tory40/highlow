@@ -380,7 +380,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -10
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &213090393
 RectTransform:
@@ -511,7 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d050516b3df6142a25e3c612dc02b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  option: {fileID: 1611588870}
 --- !u!4 &308198545
 Transform:
   m_ObjectHideFlags: 0
@@ -1624,6 +1623,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5497784847629936219, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497784847629936219, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497784847629936219, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5497784847630714487, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1804,9 +1815,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5497784847834532519, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5497784847834532523, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
       propertyPath: Loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497784847834532523, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5497784848089981929, guid: 0b3e0aa00584dd84bb7f969eead6c16e, type: 3}
       propertyPath: m_AnchorMax.x

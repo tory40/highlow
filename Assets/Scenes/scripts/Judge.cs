@@ -8,7 +8,6 @@ using UnityEngine.UI;
     [SerializeField] GameObject obj;
     [SerializeField] Text text;
 
-
     public void Setup()
     {
         obj.SetActive(false);

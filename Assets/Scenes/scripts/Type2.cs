@@ -16,7 +16,7 @@ public class Type2 : MonoBehaviour
     {
         SoundManager.Instance.PlaySE(1);
         Typenum++;
-        if (Typenum > 4)
+        if (Typenum > 8)
         {
             Typenum = 1;
         }
@@ -29,7 +29,7 @@ public class Type2 : MonoBehaviour
         Typenum--;
         if (Typenum < 1)
         {
-            Typenum = 4;
+            Typenum = 8;
         }
         number.text = Typenum.ToString();
     }

@@ -16,7 +16,7 @@ public class Remain : MonoBehaviour
     public void SetUp() 
     {
         Create();
-        Color2();
+        Color3();
         Pad();
     }
 
@@ -114,6 +114,49 @@ public class Remain : MonoBehaviour
                 ++j;
                 remain2[i].text = j.ToString();
                 remain2[i].color = Color.blue;
+            }
+        }
+    }
+
+    public void Color3() 
+    {
+        int j;
+        for (int k =0; type > k;++k)
+        {
+            j = 0;
+            Color col = Color.black;
+            switch (k)
+            {
+                case 0:
+                    col = Color.yellow;
+                    break;
+                case 1:
+                    col = Color.red;
+                    break;
+                case 2:
+                    col = Color.green;
+                    break;
+                case 3:
+                    col = Color.blue;
+                    break;
+                case 4:
+                    col = new Color(1.0f,0.5f,0.0f,1.0f);
+                    break;
+                case 5:
+                    col = Color.magenta;
+                    break;
+                case 6:
+                    col = new Color(0.7f,1.0f,0.2f,1.0f);
+                    break;
+                case 7:
+                    col = Color.cyan;
+                    break;
+            }
+            for (int i = count * k; i < count *(k+1); i++)
+            {
+                ++j;
+                remain2[i].text = j.ToString();
+                remain2[i].color = col;
             }
         }
     }

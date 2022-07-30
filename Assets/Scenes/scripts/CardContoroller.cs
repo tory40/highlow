@@ -17,7 +17,7 @@ public class CardContoroller : MonoBehaviour
     {
         
         model = new CardModel(cardID);
-        view.Show(model);
+        view.Show(model,cardID);
         
     }
     public void Hide() 

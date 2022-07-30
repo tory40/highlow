@@ -10,7 +10,7 @@ public class Music : MonoBehaviour
     int BGMnum;
     private void Start()
     {
-        int BGMnum = bgmvalue + 1;
+        BGMnum = bgmvalue + 1;
         Musicnum.text = BGMnum.ToString();
     }
 

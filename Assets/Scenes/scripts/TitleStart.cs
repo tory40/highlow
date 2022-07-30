@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 public class TitleStart : MonoBehaviour
 {
     bool canstart = true;
+    static bool playmusic = false;
 
     private void Start()
     {
-        SoundManager.Instance.PlayBGM(0);
+        if (!playmusic)
+        {
+            playmusic = true;
+            SoundManager.Instance.PlayBGM(0);
+        }
     }
     public void PressStart()
     {
